@@ -4,7 +4,10 @@ function chop(pInt, pVetor) {
     tamVetor = 0,
     idxMeio = 0,
     idxMeioAnt = 0,
-    buscaProximo = true;
+    buscaProximo = true,
+    vetorIni = 0,
+    vetorFim = 0,
+    k = 0;
   
   // ordenar pVetor
   vetorInteiros = pVetor.sort();
@@ -13,61 +16,41 @@ function chop(pInt, pVetor) {
   
   // encontrar pInt em pVetor
   tamVetor = vetorInteiros.length;
-  
-  idxMeio = Math.trunc( ( tamVetor - idxMeio ) / 2 );
+  vetorFim = tamVetor - 1;
+
+  //idxMeio = Math.trunc( ( tamVetor - idxMeio ) / 2 );
   
   while ( buscaProximo ) {
     
-      
+      idxMeio = Math.trunc( ( vetorFim - vetorIni ) / 2 );
+      idxMeio += vetorIni;
+    
       if ( pInt == vetorInteiros[idxMeio] ) {
       
         console.log('Achei!');
         buscaProximo = false;
       
-      } else if ( pInt < vetorInteiros[idxMeio] ) {
+      } else if ( pInt <= vetorInteiros[idxMeio] ) {
         
-        if ( Math.trunc( ( idxMeio ) / 2 ) == 1 ) {
-    
-          if ( pInt == vetorInteiros[idxMeio - 1 ] ) {
-            console.log('Achei, finalmente! 1');
-          } else if ( pInt == vetorInteiros[idxMeio - 2] ) {
-            console.log('Achei, finalmente! 2');
-          }
-          
-          buscaProximo = false;
-         // console.log('Valor nao encontrado');
-          
-        }
-        
-        idxMeio -= Math.round( ( idxMeio ) / 2 );
+        vetorFim = idxMeio;
         
         console.log('Menor');
       
       } else {
         
-        idxMeio += Math.trunc( ( tamVetor - idxMeio ) / 2 );
         
-        if ( Math.trunc( ( tamVetor - idxMeio ) / 2 ) == 1 ) {
-    
-          console.clear();
-    
-          if ( pInt == vetorInteiros[idxMeio + 1 ] ) {
-            console.log('Achei, finalmente! 1');
-          } else if ( pInt == vetorInteiros[idxMeio + 2] ) {
-            console.log('Achei, finalmente! 2');
-          }
-          
-          buscaProximo = false;
-         // console.log('Valor nao encontrado');
-          
-        }
+        vetorIni = idxMeio;
         console.log('Maior');
       }
   
-      idxMeioAnt = idxMeio;
     
-    
+      k++;
+      if (k > 10) {
+        buscaProximo = false;
+      }
   }
+  
+
   
   console.log(vetorInteiros);
   console.log('OK');
